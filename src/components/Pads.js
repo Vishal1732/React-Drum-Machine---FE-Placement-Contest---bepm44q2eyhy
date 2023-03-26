@@ -1,31 +1,26 @@
 import React from "react";
-import Pad from "./Pad";
-import {bank1} from "./App"
+import { bank1 } from "./App";
 
+function Pad({ handleClick, power, element, id }) {
+  const backgroundStyle = power ? "orange" : "gray";
+  return (
+    <button
+      data-tag={id}
+      type="button"
+      className="drum-pad"
+      onClick={handleClick}
+      id={bank1[element].name}
+      disabled={!power}
+      style={{ background: `${backgroundStyle}` }}
+    >
+      {element}
+      <audio
+        id={element}
+        src={bank1[element].source}
+        className="clip"
+      ></audio>
+    </button>
+  );
+}
 
-function Pads() {
-    const keypadCode = Object.keys(bank1);
-
-
-    const playSound = e => {
-    }
-
-
-    return (
-      <div id='div-pads'>
-        {keypadCode.map((pad, idx) => {
-          console.log(pad + idx)
-          return (
-            <Pad
-              id={pad+idx}
-              key={pad+idx}
-              handleClick={playSound}
-              element={pad} />
-          );
-        })}
-        <div id='display'> Show the name of current audio here </div>  
-      </div>
-    )
-  }
-
-  export default Pads ; 
+export default Pad;
